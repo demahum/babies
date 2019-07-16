@@ -1,0 +1,151 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Babies</h1>
+  <button id="add_baby_button" type="button" class="btn blue btn-outline" data-toggle="modal" data-target="#exampleModal">
+  <i class="fas fa-plus fa-sm text-white-50"></i> New Baby
+</button>
+
+</div>
+  <div id="babies_container" class="row">
+</div>
+
+<div class="modal fade" id="exampleModal" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Baby</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="baby_form" method="POST" action="#">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Gender</label>
+                  <select name="gender" class="form-control">
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Weight</label>
+                  <input name="weight" type="number" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Height</label>
+                  <input name="height" type="number" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Mother's name</label>
+                  <input name="mother_name" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Date and Time</label>
+                  <input name="date_time" type="datetime-local" class="form-control">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Gender</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Height</th>
+      <th scope="col">Mother's Name</th>
+      <th scope="col">Date-Time</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody id="babies_body">
+
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  Babies.get_babies();
+  $("#baby_form").validate({
+    rules: {
+      gender: 'required',
+      weight: 'required',
+      height: 'required',
+      mother_name: 'required',
+      date_time: 'required'
+    },
+    messages: {
+      gender: {
+        required: "Gender is required"
+      },
+      weight: {
+        required: "Weight is required"
+      },
+      height: {
+        required: "Height is required"
+      },
+      mother_name: {
+        required: "Mother's name is required"
+      },
+      datetime: {
+        required: "Date-time is required"
+      }
+    },
+    submitHandler: function(form) { console.log(form);
+        form.submit();
+        Babies.get_babies();
+        Babies.add_baby(form);
+    }
+  });
+
+/*
+  $.get( "rest/babies", function( data ) {
+    console.log(data);
+    $('#babies_container').html('');
+    for(var i=0 ; i < data.length; i++){
+      $('#babies_container').append(babies2html(data[i]));
+    }
+  });
+
+  function babies2html(baby){
+    var baby_html = $('#baby_template').html();
+    baby_html = baby_html.replace('{{gender}}', baby.gender);
+    baby_html = baby_html.replace('{{weight}}', baby.weight);
+    baby_html = baby_html.replace('{{height}}', baby.height);
+    baby_html = baby_html.replace('{{mother_name}}', baby.mother_name);
+    baby_html = baby_html.replace('{{date_time}}', baby.date_time);
+    return baby_html;
+  }*/
+  </script>
+
+  <script id="baby_template" type="html/template">
+/*  <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{gender}}</div>
+              <div class="h7 mb-0 font-weight-bold text-gray-800">Weight: {{weight}}</div>
+              <div class="h7 mb-0 font-weight-bold text-gray-800">Height: {{height}}</div>
+              <div class="h7 mb-0 font-weight-bold text-gray-800">Mother's name: {{mother_name}}</div>
+              <div class="h7 mb-0 font-weight-bold text-gray-800">Date-time: {{date_time}}</div>
+            </div>
+            <div class="col-auto">
+              <a href="#" class="btn btn-warning btn-circle">
+                <i class="fas fa-edit"></i>
+              </a><br><br>
+              <a href="#" class="btn btn-danger btn-circle">
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>*/
+  </script>
