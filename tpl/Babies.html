@@ -98,14 +98,13 @@
       }
     },
     submitHandler: function(form) { console.log(form);
-        form.submit();
-        Babies.get_babies();
-        Babies.add_baby(form);
+        var data = $("#baby_form").serializeArray().reduce(function(obj, item) {obj[item.name] = item.value; return obj;}, {});
+        Babies.add_baby(data, function(){}, function(){});
+        return true;
     }
   });
 
   </script>
 
   <script id="baby_template" type="html/template">
-      
   </script>

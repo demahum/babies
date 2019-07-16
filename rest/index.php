@@ -1,7 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
-Flight::register('db', 'PDO', array('mysql:host=localhost;dbname=babies','root','password'));
+Flight::register('db', 'PDO', array('mysql:host=localhost;dbname=babies','newuser','password'));
 
 Flight::route('GET /baby_count', function(){
     $count = Flight::db()->query('SELECT SUM(IF(gender = "MALE", 1, 0 )) AS male, SUM(IF(gender = "FEMALE", 1, 0 )) AS female FROM babies', PDO::FETCH_ASSOC)->fetch();
